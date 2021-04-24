@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="icon" type="image/x-icon" href="icons/favicon.png" />
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145130466-1"></script>
     <script>
@@ -30,7 +31,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 
     <!-- Self -->
-    <link rel="stylesheet" href="css/master.css" />
+    <link rel="stylesheet" href="public/css/master.css" />
     <!-- Colors -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Colors.js/1.2.3/colors.min.js"></script>
 
@@ -39,9 +40,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
     <!-- <link rel="stylesheet" href="../dist/L.Control.Locate.min.css" /> -->
 
+    <!-- Neighborhood Navigation -->
+    <link rel="stylesheet" href="../localsite/css/base.css" />
+    <script type="text/javascript" src="../localsite/js/localsite.js"></script>
+    <script type="text/javascript" src="../localsite/js/navigation.js"></script>
+
     <title>Public Tree Map</title>
   </head>
   <body class="sidebar-mobile--closed">
+  <div id="map-flex-row">
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
@@ -55,11 +62,16 @@
     </div>
 
     <div id="container">
+
+      <div style="display:none" id="hero-logo">
+        <img src="https://model.earth/community/img/logo/code-for-america-and-earth.png">
+      </div>
+
       <!-- Toolbar -->
       <div id="toolbar">
         <div class="address-container">
           <label class="toolbar-label">ZOOM TO LOCATION</label>
-          <input "search" id="address-input" placeholder="Enter address" />
+          <input id="address-input" placeholder="Enter address" />
         </div>
         <!-- Color Filter -->
         <div class="color-filter-container">
@@ -82,8 +94,10 @@
       </div>
       <!-- Map -->
       <div id="map"></div>
+
     </div>
 
+    
     <!-- Sidebar -->
     <div id="sidebar">
       <div class="banner">PUBLIC TREE MAP - SANTA MONICA</div>
@@ -268,17 +282,51 @@
         </div>
       </div>
       <div id="sidebar-default">
-        <h1>Explore Our Urban Forest</h1>
+        <h1>Explore Our Urban&nbsp;Forest</h1>
         <div class = 'sidebar-details'>Every public tree is a civic resource. The city of Santa Monica provides a public dataset describing the properties of all 35,000 public park and street trees in the city. Our goal is to provide a map that lets you view, filter, and explore the data. This website is built and maintained by volunteers. If you notice a problem or would like to request a feature, <a target="_blank" rel="noopener noreferrer" href = "https://github.com/Public-Tree-Map/public-tree-map/issues/new/choose">please let us know!</a>
         </div>
         <div class="sidebar-seperator"></div>
-        <h5><a target="_blank" rel="noopener noreferrer" href = "https://public-tree-map.github.io/">About</a>  |  <a target="_blank" rel="noopener noreferrer" href="https://github.com/Public-Tree-Map/public-tree-map/issues/new/choose">Feedback</a>  |  <a target="_blank" rel="noopener noreferrer" href = "https://github.com/Public-Tree-Map/public-tree-map-data-pipeline#data-sources">Data Sources</a> |  <a target="_blank" rel="noopener noreferrer" href = "https://www.instagram.com/publictreemap/">Instagram</a></h5>
+        <h5><a target="_blank" rel="noopener noreferrer" href = "https://public-tree-map.github.io/">About</a>  |  <a target="_blank" rel="noopener noreferrer" href="https://github.com/Public-Tree-Map/public-tree-map/issues/new/choose">Feedback</a>  |  <a target="_blank" rel="noopener noreferrer" href = "https://github.com/Public-Tree-Map/public-tree-map-data-pipeline#data-sources">Data Sources</a> |  <a target="_blank" rel="noopener noreferrer" href = "https://www.instagram.com/publictreemap/">Instagram</a>
+          <br><br>
+
+          <a href="https://publictreemap.org/">Website</a> | 
+          <a href="https://storage.googleapis.com/public-tree-map/data/map.json">JSON</a>
+        </h5>
         <button id="sidebar-default-explore" class = "btn btn--mobile">Explore the Map</button>
       </div>
       <div id="sidebar-error">
         <h1>Error</h1>
         <div>The tree you requested was not found.</div>
       </div>
+    </div>
+
+    </div>
+
+    <div class="content contentpadding" style="clear:both;">
+
+
+      <h2>Public Tree Map</h2>
+      <a href="https://www.hackforla.org/projects/public-tree-map">Tree Map Developers - Hack for LA</a><br>
+
+
+      <h2>Treepedia</h2>
+      <a href="http://senseable.mit.edu/treepedia">Treepedia - Canopy Data generated from Google Street Map</a><br>
+      Code for Atlanta (Slack channel #treepedia) is working on adding data on Atlanta’s green canopy cover to MIT’s Treepedia.<br><br>
+
+
+
+      <a href="https://github.com/localsite/public-tree-map">Edit the Neighborhood Fork</a> - Copy updates from master into the gh-pages branch.<br>
+
+      To Do: 
+      Activate hero-logo display in css/hero/main.css<br>
+
+
+      <h2>Community Data</h2>
+
+      <a href="../localsite/map/brownfields/">Brownfields - Cleanup locations in your community</a><br><br>
+
+      <a href="https://neighborhood.org/localsite/">Localsite Navigation</a> - Location filters and App Topics for <a href="https://www.codeforamerica.org/">Code for America</a> and <a href="https://codeforall.org/members">Code for All</a> projects
+
     </div>
 
     <!-- Scripts -->
@@ -296,14 +344,14 @@
     <script src="https://hammerjs.github.io/dist/hammer.min.js" type="text/javascript"></script>
 
     <!-- Self -->
-    <script src="js/main.js" type="text/javascript"></script>
-    <script src="js/Map.js" type="text/javascript"></script>
-    <script src="js/Geolocation.js" type="text/javascript"></script>
-    <script src="js/Sidebar.js" type="text/javascript"></script>
-    <script src="js/ColorFilter.js" type="text/javascript"></script>
-    <script src="js/SpeciesFilter.js" type="text/javascript"></script>
-    <script src="js/Legend.js" type="text/javascript"></script>
-    <script src="js/Palettes.js" type="text/javascript"></script>
+    <script src="public/js/main.js" type="text/javascript"></script>
+    <script src="public/js/Map.js" type="text/javascript"></script>
+    <script src="public/js/Geolocation.js" type="text/javascript"></script>
+    <script src="public/js/Sidebar.js" type="text/javascript"></script>
+    <script src="public/js/ColorFilter.js" type="text/javascript"></script>
+    <script src="public/js/SpeciesFilter.js" type="text/javascript"></script>
+    <script src="public/js/Legend.js" type="text/javascript"></script>
+    <script src="public/js/Palettes.js" type="text/javascript"></script>
 
     <script type="text/javascript">app.init()</script>
   </body>
