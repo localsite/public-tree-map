@@ -22,6 +22,14 @@ bodyX {
   min-height: 600px;
 }
 
+#hero-logo {
+  displayX: inline-block !important;
+  position: absolute;
+  right: 40px;
+  width: 120px;
+  z-index: 99999;
+}
+
 #container {
   width: 100%;
   position: relative;
