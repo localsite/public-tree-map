@@ -18,9 +18,10 @@ var app = this.app || {};
     this.zoomOnClick = 18
 
     this.leafletMap = L.map('map', {
-      center: [34.0215, -118.481],
+      center: [34.0215, -118.5],
       zoom: this.zoom,
       zoomControl: false,
+      scrollWheelZoom: false,
       layers: [
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
@@ -29,6 +30,15 @@ var app = this.app || {};
         })
       ]
     });
+
+    this.leafletMap.on('click', function() {
+      if (this.scrollWheelZoom.enabled()) {
+        this.scrollWheelZoom.disable();
+      }
+      else {
+        this.scrollWheelZoom.enable();
+      }
+    })
 
     //trigger leaflet.locate
     this.triggerLocate = () => {
