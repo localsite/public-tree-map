@@ -1,0 +1,11 @@
+/* Main styling */
+@import "./hero/main.css";
+@import "./hero/map.css";
+@import "./hero/sidebar.css";
+@import "./hero/toolbar.css";
+
+/* Mobile styling */
+@import "./mobile/main.css" screen and (max-width: 890px);
+@import "./mobile/sidebar.css" screen and (max-width: 890px);
+@import "./mobile//toolbar.css" screen and (max-width: 890px);
+@import "./mobile/map.css" screen and (max-width: 890px);
