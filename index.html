@@ -40,14 +40,29 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
     <!-- <link rel="stylesheet" href="../dist/L.Control.Locate.min.css" /> -->
 
-    <!-- Neighborhood Navigation -->
-    <link rel="stylesheet" href="../localsite/css/base.css" />
-    <script type="text/javascript" src="../localsite/js/localsite.js"></script>
+    <!-- Header Navigation -->
+    <script>
+        if(typeof param == 'undefined') {
+          var param = {};
+        }
+        param.titleArray = ["code","for","america"]
+        param.startTitle = "Code for America"
+        param.headerLogo = "<img src='img/logo/speakman-icon.png' style='width:28px'>";
+        param.headerFile = "../localsite/header.html"
+        param.footer = "../localsite/footer.html"
+    </script>
     <script type="text/javascript" src="../localsite/js/navigation.js"></script>
-
+    
     <title>Public Tree Map</title>
   </head>
   <body class="sidebar-mobile--closed">
+
+    <script type="text/javascript" src="../localsite/js/map-embed.js?preloadmap=false"></script>
+    <!--
+      Replace this error from map-filters.js
+      Your site URL to be authorized: http://localhost:8887/public-tree-map/
+    -->
+
   <div id="map-flex-row">
     <noscript>
       You need to enable JavaScript to run this app.
@@ -67,31 +82,7 @@
         <img src="https://model.earth/community/img/logo/code-for-america-and-earth.png">
       </div>
 
-      <!-- Toolbar -->
-      <div id="toolbar">
-        <div class="address-container">
-          <label class="toolbar-label">ZOOM TO LOCATION</label>
-          <input id="address-input" placeholder="Enter address" />
-        </div>
-        <!-- Color Filter -->
-        <div class="color-filter-container">
-          <label class="toolbar-label">GROUP BY</label>
-          <div id="color-filter" class="btn-group">
-            <button id="species-button-species" class="species-button active" value="name_common">Species</button>
-            <button id="species-button-family" class="species-button" value="family_name_botanical">Families</button>
-            <button id="species-button-native" class="species-button" value="nativity">Native</button>
-            <button id="species-button-heritage" class="species-button" value="heritage">SM Heritage</button>
-            <button id="species-button-IUCN" class="species-button" value="iucn_status">Endangered</button>
-          </div>
-        </div>
-        <div class="species-filter-container">
-          <label class="toolbar-label">FIND A SPECIES</label>
-          <div id="select2-container">
-            <select id="species-filter" name="state" multiple="multiple">
-            </select>
-          </div> 
-        </div>
-      </div>
+      
       <!-- Map -->
       <div id="map"></div>
 
@@ -100,11 +91,15 @@
     
     <!-- Sidebar -->
     <div id="sidebar">
-      <div class="banner">PUBLIC TREE MAP - SANTA MONICA</div>
+      <button id="sidebar-close-button" class="btn-close">
+          <img src="public/icons/close-btn-dark.svg" alt="close" class="btn-close--dark"/>
+          <img src="public/icons/close-btn-light.svg" alt="close" class="btn-close--light"/>
+      </button>
+      <div class="banner" style="displayX:none">PUBLIC TREE MAP - SANTA MONICA</div>
       <div id="sidebar-vacant">
         <button id="sidebar-vacant-close-button" class = "btn-close">
-          <img src="./icons/close-btn-dark.svg" alt="close" class="btn-close--dark"/>
-          <img src="./icons/close-btn-light.svg" alt="close" class="btn-close--light"/>
+          <img src="public/icons/close-btn-dark.svg" alt="close" class="btn-close--dark"/>
+          <img src="public/icons/close-btn-light.svg" alt="close" class="btn-close--light"/>
         </button>
         <div id="sidebar-vacant-content">
           <h1 id="sidebar-vacant-common-name"></h1>
@@ -115,13 +110,13 @@
             <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
 
                 <a class="a2a_button_facebook">
-                    <img src="icons/facebook-icon-white-copy@3x.png" border="0" alt="Facebook" width="20" height="20">
+                    <img src="public/icons/facebook-icon-white-copy@3x.png" border="0" alt="Facebook" width="20" height="20">
                 </a>
                 <a class="a2a_button_twitter">
-                    <img src="icons/twitter-icon-white-copy@3x.png" border="0" alt="Facebook" width="20" height="20">
+                    <img src="public/icons/twitter-icon-white-copy@3x.png" border="0" alt="Facebook" width="20" height="20">
                 </a>
                 <a class="a2a_button_email">
-                  <img src="icons/email-icon@3x.png" border="0" alt="Email" width="20" height="20"></img>
+                  <img src="public/icons/email-icon@3x.png" border="0" alt="Email" width="20" height="20"></img>
                 </a>
                 <!--<a class="a2a_button_copy_link"></a> NO SVG PROVIDED-->
             </div>
@@ -172,10 +167,6 @@
           <div id="rightButton" class="sliderButton"><button onclick="nextSlideImage()">></button></div>
           <div id="sidebar-image-credit">image via <a id="sidebar-image-credit-link" target="__blank">eol.org</a></div>
         </div>
-        <button id="sidebar-close-button" class = "btn-close">
-          <img src="./icons/close-btn-dark.svg" alt="close" class="btn-close--dark"/>
-          <img src="./icons/close-btn-light.svg" alt="close" class="btn-close--light"/>
-        </button>
         <div id="sidebar-content">
           <h1 id="sidebar-common-name"></h1>
           <h2 id="sidebar-botanical-name"></h2>
@@ -186,13 +177,13 @@
             <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
 
                 <a class="a2a_button_facebook">
-                    <img src="icons/facebook-icon-white-copy@3x.png" border="0" alt="Facebook" width="20" height="20">
+                    <img src="public/icons/facebook-icon-white-copy@3x.png" border="0" alt="Facebook" width="20" height="20">
                 </a>
                 <a class="a2a_button_twitter">
-                    <img src="icons/twitter-icon-white-copy@3x.png" border="0" alt="Facebook" width="20" height="20">
+                    <img src="public/icons/twitter-icon-white-copy@3x.png" border="0" alt="Facebook" width="20" height="20">
                 </a>
                 <a class="a2a_button_email">
-                  <img src="icons/email-icon@3x.png" border="0" alt="Email" width="20" height="20"></img>
+                  <img src="public/icons/email-icon@3x.png" border="0" alt="Email" width="20" height="20"></img>
                 </a>
                 <!--<a class="a2a_button_copy_link"></a> NO SVG PROVIDED-->
             </div>
@@ -302,30 +293,69 @@
 
     </div>
 
+
+
+<!-- Toolbar -->
+      <div id="toolbar">
+        <div class="address-container">
+          <label class="toolbar-label">ZOOM TO LOCATION</label>
+          <input id="address-input" placeholder="Enter address" />
+        </div>
+        <!-- Color Filter -->
+        <div class="color-filter-container">
+          <label class="toolbar-label">GROUP BY</label>
+          <div id="color-filter" class="btn-group">
+            <button id="species-button-species" class="species-button active" value="name_common">Species</button>
+            <button id="species-button-family" class="species-button" value="family_name_botanical">Families</button>
+            <button id="species-button-native" class="species-button" value="nativity">Native</button>
+            <button id="species-button-heritage" class="species-button" value="heritage">SM Heritage</button>
+            <button id="species-button-IUCN" class="species-button" value="iucn_status">Endangered</button>
+          </div>
+        </div>
+        <div class="species-filter-container">
+          <label class="toolbar-label">FIND A SPECIES</label>
+          <div id="select2-container">
+            <select id="species-filter" name="state" multiple="multiple">
+            </select>
+          </div> 
+        </div>
+      </div>
+
+
     <div class="content contentpadding" style="clear:both;">
 
+      <div class="row">
+        <div class="column" style="flex:2">
+              
 
-      <h2>Public Tree Map</h2>
-      <a href="https://www.hackforla.org/projects/public-tree-map">Tree Map Developers - Hack for LA</a><br>
-
-
-      <h2>Treepedia</h2>
-      <a href="http://senseable.mit.edu/treepedia">Treepedia - Canopy Data generated from Google Street Map</a><br>
-      Code for Atlanta (Slack channel #treepedia) is working on adding data on Atlanta’s green canopy cover to MIT’s Treepedia.<br><br>
+          <h2>Public Tree Map</h2>
+          <a href="https://www.hackforla.org/projects/public-tree-map">Tree Map Developers - Hack for LA</a><br>
 
 
-
-      <a href="https://github.com/localsite/public-tree-map">Edit the Neighborhood Fork</a> - Copy updates from master into the gh-pages branch.<br>
-
-      To Do: 
-      Activate hero-logo display in css/hero/main.css<br>
+          <h2>Treepedia</h2>
+          <a href="http://senseable.mit.edu/treepedia">Treepedia - Canopy Data generated from Google Street Map</a><br>
+          Code for Atlanta (Slack channel #treepedia) is working on adding data on Atlanta’s green canopy cover to MIT’s Treepedia.<br><br>
 
 
-      <h2>Community Data</h2>
 
-      <a href="../localsite/map/brownfields/">Brownfields - Cleanup locations in your community</a><br><br>
+          <a href="https://github.com/localsite/public-tree-map">Edit the Neighborhood Fork</a> - Copy updates from master into the gh-pages branch.<br>
 
-      <a href="https://neighborhood.org/localsite/">Localsite Navigation</a> - Location filters and App Topics for <a href="https://www.codeforamerica.org/">Code for America</a> and <a href="https://codeforall.org/members">Code for All</a> projects
+          To Do: 
+          Activate hero-logo display in css/hero/main.css<br>
+
+
+          <h2>Community Data</h2>
+
+          <a href="../localsite/map/brownfields/">Brownfields - Cleanup locations in your community</a><br><br>
+
+          <a href="https://neighborhood.org/localsite/">Localsite Navigation</a> - Location filters and App Topics for <a href="https://www.codeforamerica.org/">Code for America</a> and <a href="https://codeforall.org/members">Code for All</a> projects
+
+        </div>
+        <div class="column" style="border:1px solid #ccc; margin-left:30px">
+          
+
+        </div>
+      </div>
 
     </div>
 
